@@ -6,5 +6,5 @@ for i in range(1,T+1):
     a = map(int, input().split())
     N = list(a)    
     # 정수 리스트 중 최솟값 구하기
-    result = max(N)-min(N)
-    print('#{0} {1}'.format(i, result))
+    res = max(N)-min(N)
+    print('#{0} {1}'.format(i, res))
