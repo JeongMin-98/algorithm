@@ -1,26 +1,26 @@
 def binarySearch(a, key):
-    start = 0
-    end = len(a)-1
+    start = 1
+    end = a
     count = 0
     find = False
-    while not find:
-        middle = start + (end - start) // 2
-        if key == a[middle]:
-            find = True
-        elif key < a[middle]:
-            end = middle - 1
-        else:
-            start = middle + 1
+    while start <= end and not find:
+        middle = (start+end)//2
         count += 1
+        if key == middle:
+            find = True
+        elif key < middle:
+            end = middle
+        else:
+            start = middle
+        
     return count
 
 T = int(input())
 
 for test_case in range(1,T+1): # test_case
     P, A, B = map(int, input().split()) # P : 전체 쪽 수, A : A가 찾아야하는 쪽, B : B가 찾아야하는 쪽
-    book = list(range(0,P))
-    FindA = binarySearch(book, A-1)
-    FindB = binarySearch(book, B-1)
+    FindA = binarySearch(P, A)
+    FindB = binarySearch(P, B)
     if FindA < FindB:
         print("#{0} A".format(test_case))
     elif FindA > FindB:
