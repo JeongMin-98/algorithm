@@ -18,9 +18,9 @@ T = int(input())
 
 for test_case in range(1,T+1): # test_case
     P, A, B = map(int, input().split()) # P : 전체 쪽 수, A : A가 찾아야하는 쪽, B : B가 찾아야하는 쪽
-    book = list(range(1,P+1))
-    FindA = binarySearch(book, A)
-    FindB = binarySearch(book, B)
+    book = list(range(0,P))
+    FindA = binarySearch(book, A-1)
+    FindB = binarySearch(book, B-1)
     if FindA < FindB:
         print("#{0} A".format(test_case))
     elif FindA > FindB:
