@@ -1,42 +1,30 @@
-T = int(input())
-for x in range(1,T+1):
-    
-    # k는 한번에 갈 수 있는 정류장의 개수
-    # N은 총 정류장의 개수
-    # M은 충전기가 설치된 정류장의 개수
+"""
 
-    k,n,m = map(int, input().split())
-    line = [0]*(n+1)
-    s = map(int, input().split()) # 충전기가 설치되어있는 정류장 번호
-    station = list(s)
-    count = 0 # 충전횟수
-    for y in range(0, len(station)):
-        line[station[y]] +=1
-    bus = 0
-    fuel = k
-    while bus<len(line):
-        if fuel>1:
-            bus+=1
-            fuel-=1
-        elif fuel=1:
-            if line[bus+1]==0:
-                if line[bus]==1:
-                    fuel+=k
-                    count+=1
-                else:
-                    bus
-            else:
-                bus+=1
-                fuel-=1
-        else:
-            if line[bus]==1:
-                fuel+=k
-                count+=1
-            else:
-                bus-=1
-                fuel+=1     
-    
-    print("#{} {}".format(x, count))
+[예시]
 
-     
+다음은 K = 3, N = 10, M = 5, 충전기가 설치된 정류장이 1, 3, 5, 7, 9인 경우의 예이다.
+
+[입력]
+ 
+첫 줄에 노선 수 T가 주어진다.  ( 1 ≤ T ≤ 50 )
+
+각 노선별로 K, N, M이 주어지고, 다음줄에 M개의 정류장 번호가 주어진다. ( 1 ≤ K, N, M ≤ 100 )
+
+K : 한번 충전으로 최대한 이동할 수 있는 정류장 수
+M : 충전기가 설치된 정류장 수
+N : 전체 정류장 수
+
+"""
+
+T = int(input()) # test_case
+for test_case in range(1,T+1):
+
+    K,M,N = map(int, input().split())
+    charger = list(map(int, input().split()))
+
+    station = [0]*N
+
+    for i in range(len(charger)):
+        station[charger[i]]+=1
     
+

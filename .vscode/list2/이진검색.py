@@ -11,7 +11,7 @@ def binarySearch(a, key):
             start = middle + 1
     return False
     
-list = [1,2,3,8,10]
+list1 = list(range(1,400+1))
 
-res = binarySearch(list, 2)
+res = binarySearch(list1, 300)
 print(res)
