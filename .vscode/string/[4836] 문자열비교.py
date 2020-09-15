@@ -9,24 +9,25 @@ def findstring(p, t):
     count = 0
     skip = list(reversed(p))
     while j<N:
-        if p[i]!=t[j]:
+        
+        if t[j] == p[i]:
+            for x in range(M):
+                if skip[x] == t[j]:
+                    j -= 1
+                    pp += 1
+                else:
+                    break
+            if pp == M:
+                count += 1
+            j = j + pp + 1
+        else:
             if t[j] in skip:
                 for x in range(M):
                     if t[j] == skip[x]:
                         j += x
             else:
                 j += M
-        else:
-            for x in range(M):
-                if t[j] == skip[x]:
-                    j -= 1
-                    pp += 1
-                else:
-                    break
-            if pp == M:
-                count+=1
-            j = j + pp + M
-        
+    
     return count
 
 T = int(input())
