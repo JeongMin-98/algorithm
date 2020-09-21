@@ -30,31 +30,16 @@ print(‘{‘) 같은 경우는 입력으로 주어지지 않으므로 고려하
  """
 
 
-def check_bracket(s):
+def make_checker(s):
     arr = list(map(str, s))
     checker = []
     find = 1
     for i in arr:
         if i in ['(','{',')','}']:
             checker.append(i)
-    
-    for i in checker:
-        if i == "(":
-            if checker[-1]==")":
-                checker.pop(-1)
-            else:
-                find = 0
-        if i == "{":
-            if checker[-1]=="}":
-                checker.pop(-1)
-            else:
-                find = 0
-
-    return find
+    return checker
     
 T = int(input())
 
 for test_case in range(1, T+1):
     s = input()
-
-    print("#{0} {1}".format(test_case, check_bracket(s)))
