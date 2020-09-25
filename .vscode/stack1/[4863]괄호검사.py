@@ -28,18 +28,43 @@ print(‘{‘) 같은 경우는 입력으로 주어지지 않으므로 고려하
 각 줄마다 "#T" (T는 테스트 케이스 번호)를 출력한 뒤, 답을 출력한다.
 
  """
-
-
-def make_checker(s):
+def pop(self):
+    if len(self) == 0:
+        # underflow
+        return 1
+    else:
+        return self.pop(-1)
+def push(self,item):
+    self.append(item)        
+def bracketchecker(s):
     arr = list(map(str, s))
     checker = []
-    find = 1
-    for i in arr:
-        if i in ['(','{',')','}']:
-            checker.append(i)
-    return checker
+    i = 0
+    while i < len(arr):
+        if arr[i] in ['(','{']:
+            push(checker,arr[i])
+        if arr[i] in [')','}']:
+            if checker[-1]=='(':
+                if arr[i] == ')':
+                    checker.pop(-1)
+                if arr[i] == '}':
+                    return 0
+            elif checker[-1]=='{':
+                if arr[i] == '}':
+                    checker.pop(-1)
+                if arr[i] == ')':
+                    return 0
+        i += 1
+    if len(checker)==0:
+        return 1
+    else:
+        return 0
+
+
     
 T = int(input())
 
 for test_case in range(1, T+1):
     s = input()
+    
+    print("#{0} {1}".format(test_case, bracketchecker(s)))
