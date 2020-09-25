@@ -36,3 +36,25 @@ E개의 줄 이후에는 경로의 존재를 확인할 출발 노드 S와 도착
 각 줄마다 "#T" (T는 테스트 케이스 번호)를 출력한 뒤, 답을 출력한다.
 
  """
+
+ # 입력 값 test_case , V (node의 개수) E (route의 개수), 출발노드 S, 도착노드 N
+
+T = int(input())
+
+for test_case in range(1,T+1):
+    V, E = map(int, input().split())
+    NODE = {x : [] for x in range(1,V+1)}
+    for j in range(E):
+        S, N = map(int, input().split()) # 출발노드와 연결된 노드의 루트 입력
+        NODE[S].append(N)
+    S, G = map(int, input().split()) # 출발노드와 도착노드 연결되어있는지?
+    for j in range(len(NODE[S])):
+        K = NODE[S][j] 
+        for x in range(len(NODE[K])):
+            if NODE[K][x] == G:
+                result = 1
+            else:
+                result = 0
+
+    print("#{0} {1}".format(test_case, result))
+
