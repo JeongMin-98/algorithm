@@ -39,22 +39,42 @@ E개의 줄 이후에는 경로의 존재를 확인할 출발 노드 S와 도착
 
  # 입력 값 test_case , V (node의 개수) E (route의 개수), 출발노드 S, 도착노드 N
 
+def GRAPHROUTE(SP, G):
+    
+    global NODE
+
+    visited = {y : False for y in range(1,V+1)} # 노드에 들렸는지 안들렸는지 boolean으로 표현 
+    stack = [] # 연결된 노드 
+
+    stack.append(SP) # 시작 지점 stack에 저장
+    visited[SP] = True # 시작지점 방문 기록 True 지정
+    i = 0
+    
+    while i < len(NODE[SP]):
+        A = NODE[SP][i]
+        if visited[A]:
+            continue
+        else:
+            visited[A] = True
+            stack.append(A)
+            if len(NODE[A]) == 0:
+                if G in stack:
+                    return 1
+                    break
+                else:
+                    A = stack[-1]
+                    stack.pop(-1)
+            else:
+                SP = A
+    return 0
+
 T = int(input())
 
-for test_case in range(1,T+1):
-    V, E = map(int, input().split())
-    NODE = {x : [] for x in range(1,V+1)}
+for test_case in range(1,T+1): 
+    V, E = map(int, input().split()) # V: node의 개수 , E: route의 개수
+    NODE = {x : [] for x in range(1,V+1)} # 각 노드마다 각 루트로 연결된 노드를 dictionary로 만듬
     for j in range(E):
         S, N = map(int, input().split()) # 출발노드와 연결된 노드의 루트 입력
         NODE[S].append(N)
-    S, G = map(int, input().split()) # 출발노드와 도착노드 연결되어있는지?
-    for j in range(len(NODE[S])):
-        K = NODE[S][j] 
-        for x in range(len(NODE[K])):
-            if NODE[K][x] == G:
-                result = 1
-            else:
-                result = 0
-
-    print("#{0} {1}".format(test_case, result))
-
+    SP, G = map(int, input().split()) # 출발노드(SF)와 도착노드(G)연결되어있는지?
+    print("#{0} {1}".format(test_case, GRAPHROUTE(SP, G)))
