@@ -50,27 +50,20 @@ def GRAPHROUTE(SP, G):
     visited[SP] = True # 시작지점 방문 기록 True 지정
     i = 0
     
-    while i < len(NODE[SP]):
+    for i in range(len(NODE[SP])):
         A = NODE[SP][i]
         if visited[A]:
-            stack.pop(-1)
-            SP = stack[-1]
-            if visited[NODE[SP][i]]:
-                i += 1
+            continue
         else:
-            visited[A] = True
             stack.append(A)
-            if len(NODE[A]) == 0:
-                if G in stack:
+            visited[A] = True
+            if len(NODE[A])==0:
+                if visited[G]:
                     return 1
-                    break
                 else:
-                    stack.pop(-1)
-                    A = stack[-1]
-            else:
-                SP = A
-                i = 0
-    return 0
+                    
+
+
 
 T = int(input())
 
