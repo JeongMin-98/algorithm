@@ -43,7 +43,9 @@ def GRAPHROUTE(SP, G):
     
     global NODE
 
-    visited = {y : False for y in range(1,V+1)} # 노드에 들렸는지 안들렸는지 boolean으로 표현 
+    visited = { } # 노드에 들렸는지 안들렸는지 boolean으로 표현
+    for i in range(1,V+1):
+        visited[i] = False
     stack = [] # 연결된 노드 
 
     stack.append(SP) # 시작 지점 stack에 저장
@@ -72,7 +74,9 @@ T = int(input())
 
 for test_case in range(1,T+1): 
     V, E = map(int, input().split()) # V: node의 개수 , E: route의 개수
-    NODE = {x : [] for x in range(1,V+1)} # 각 노드마다 각 루트로 연결된 노드를 dictionary로 만듬
+    NODE = {}
+    for i in range(1,V+1):
+        NODE[i] = [ ] # 각 노드마다 각 루트로 연결된 노드를 dictionary로 만듬
     for j in range(E):
         S, N = map(int, input().split()) # 출발노드와 연결된 노드의 루트 입력
         NODE[S].append(N)
