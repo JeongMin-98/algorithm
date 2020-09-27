@@ -23,27 +23,32 @@ C 1글자가 남았으므로 1을 리턴한다.
 #과 1번부터인 테스트케이스 번호, 빈칸에 이어 답을 출력한다. """
 
 def Erase_repeated(char):
-    stack = []
     
-    while True:
-        for i in range(len(char)-1):
-            if char[i]!=char[i+1]:
-                i += 1
+    stack = []
+    i = 0
+    if len(stack) != len(char):
+        while i < (len(char)-1):
+            i = 0
+            if len(stack) == 0:
+                if char[i] != char[i+1]:
+                    stack.append(char[i])
+                    i += 1
+                else:
+                    for j in range(i, len(char)):
+                        if char[i] != char[j]:
+                            del char[i:j]
+                            break
             else:
-                WP = i
-                break
-        while(WP):
-            for j in range(WP, len(char)):
-                if char[WP] != char[j]:
-                    EP = j
-                    if EP != None:
-                        break
-            del char[WP:EP]
-            WP = None
-            EP = None
+                if char[i] != char[i+1]:
+                    stack.append(char[i])
+                else:
+                    stack.pop(-1)
+                    for j in range(i, len(char)):
+                        if char[i] != char[j]:
+                            del char[i:j]
+                            break
+                i += 1
         
-        if i > (len(char)-1):
-            break
     return char
 
 T = int(input())
