@@ -45,22 +45,26 @@ def GRAPHROUTE(SP, G):
 
     visited = [False] * len(NODE)
     stack = [] # 연결된 노드 
-
-    stack.append(SP) # 시작 지점 stack에 저장
-    visited[SP] = True # 시작지점 방문 기록 True 지정
-    i = 0
+    v = SP
+    while(not(visited[v])):
+        visited[v] = True
+        stack.append(v)
+        while(NODE[v]):
+            for i in range(len(NODE[v])):
+                A = NODE[v][i]
+                if not (visited[A]):
+                    w = NODE[v][i]
+                    while (not (visited[w])):
+                        visited[w]=True
+                        stack.append(w)
+                        v = w
+        v = stack[-1]
+        stack.pop(-1)
+    if visited[G]:
+        return 1
+    else:
+        return 0
     
-    for i in range(len(NODE[SP])):
-        A = NODE[SP][i]
-        if visited[A]:
-            continue
-        else:
-            stack.append(A)
-            visited[A] = True
-            if len(NODE[A])==0:
-                if visited[G]:
-                    return 1
-                else:
                     
 
 
