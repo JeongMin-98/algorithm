@@ -25,9 +25,11 @@ C 1글자가 남았으므로 1을 리턴한다.
 def Erase_repeated(char):
     
     stack = []
-    v = 0
+    v = len(stack)
     while v < len(char) and len(char)!=len(stack):
         w = v+1
+        if w >= len(char):
+            break
         if char[v] != char[w]:
             stack.append(char[v])
             v = w
@@ -35,9 +37,10 @@ def Erase_repeated(char):
             if not stack:
                 del char[v:w]
             else:
-                stack.pop(-1)
+                stack.append(char[v])
                 del char[v:w+1]
-                v = v - (w+1-v)
+                del stack[len(stack)-(w-v+1):]
+                v = len(stack)
     return char
 
 T = int(input())
