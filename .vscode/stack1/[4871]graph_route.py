@@ -45,28 +45,40 @@ def GRAPHROUTE(SP, G):
 
     visited = [False] * len(NODE)
     stack = [] # 연결된 노드 
-    v = SP
-    while(not(visited[v])):
-        visited[v] = True
-        stack.append(v)
-        while(NODE[v]):
-            for i in range(len(NODE[v])):
-                A = NODE[v][i]
-                if not (visited[A]):
-                    w = NODE[v][i]
-                    while (not (visited[w])):
-                        visited[w]=True
-                        stack.append(w)
-                        v = w
-        v = stack[-1]
-        stack.pop(-1)
-    if visited[G]:
-        return 1
-    else:
-        return 0
+    v = SP # v가 Start point 시작
     
-                    
+     
+    visited[v] = True
+    stack.append(v) # Start point에 v가 방문
+    i = 0
+    while True: # do while문 python에서 구현
+        for i in NODE[v]: # v노드와 연결된 노드를 순서대로 불러오기
+            if not visited[i]: # 연결된 첫번째 노드에 방문하지 않았다면
+                w = i # W 에 i를 저장
+                if w != None: # w에 값이 있기 떄문에 for문에서 break
+                    break
+        while(w): # w에 값이 있는 동안 반복실행
+            visited[w] = True # w에 있는 노드를 방문함, stack에 저장
+            stack.append(w)
+            v = w # v에 w의 값을 저장, w는 NONE 저장
+            w = None
+            for i in NODE[v]: # 최근에 방문한 노드에 연결된 다음 노드에 방문하지 않았다면, 
+                if not visited[i]: 
+                    w = i # w 에 그 다음 노드를 저장
+                    if w != None:
+                        break 
+        if len(stack)==0 or visited[G]: # stack에 없거나 목표지점에 방문했다면 종료
+            break
+        else:
+            v = stack[-1] # stack에 있다면 반목문을 지속적으로 실행
+            stack.pop(-1)
 
+    if visited[G]: # 목표지점에 방문했다면 1을 반환 
+        return 1
+    else:          # 목표지점에 방문하지 못했다면 0을 반환
+        return 0
+
+        
 
 
 T = int(input())
