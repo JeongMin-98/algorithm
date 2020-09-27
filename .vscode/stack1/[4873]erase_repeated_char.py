@@ -21,3 +21,35 @@ C 1글자가 남았으므로 1을 리턴한다.
 [출력]
  
 #과 1번부터인 테스트케이스 번호, 빈칸에 이어 답을 출력한다. """
+
+def Erase_repeated(char):
+    stack = []
+    
+    while True:
+        i = 0
+        while i < (len(char)-1):
+            if char[i]!=char[i+1]:
+                i += 1
+            else:
+                WP = i
+                break
+        while(WP):
+            for j in range(WP, len(char)):
+                if char[WP] != char[j]:
+                    EP = j
+                    if EP != None:
+                        break
+            del char[WP:EP]
+            WP = None
+            EP = None
+        
+        if i >= (len(char)-1):
+            break
+    return char
+
+T = int(input())
+for test_case in range(1, T+1):
+    char = list(map(str, input()))
+    Erased = Erase_repeated(char)
+
+    print("#{0} {1}".format(test_case, len(Erased)))
