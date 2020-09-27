@@ -26,8 +26,7 @@ def Erase_repeated(char):
     stack = []
     
     while True:
-        i = 0
-        while i < (len(char)-1):
+        for i in range(len(char)-1):
             if char[i]!=char[i+1]:
                 i += 1
             else:
@@ -43,7 +42,7 @@ def Erase_repeated(char):
             WP = None
             EP = None
         
-        if i >= (len(char)-1):
+        if i > (len(char)-1):
             break
     return char
 
