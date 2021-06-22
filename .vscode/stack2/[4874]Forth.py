@@ -6,7 +6,7 @@ for test_case in range(1, T+1):
     a = 0; b=0
 
     for i in forth:
-        if chr(48) <= i and chr(57) >= i:
+        if chr(49) <= i and chr(57) >= i: # chr(57):9
             stack.append(i)
         elif i in ['+','-','/','*']:
             if len(stack)>1:
@@ -17,15 +17,19 @@ for test_case in range(1, T+1):
                 elif i == '-':
                     stack.append(b-a)
                 elif i == '/':
-                    stack.append(b/a)
+                    stack.append(b//a)
                 else:
                     stack.append(b*a)
             else:
                 result = 'error'
                 break
         else:
-            result = stack.pop(-1)
-            break
+            if len(stack)==1:
+                result = stack.pop(-1)
+                break
+            else:
+                result="error"
+                break
     if not(result):
         result = "error"
 

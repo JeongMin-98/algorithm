@@ -27,40 +27,40 @@ print(‘{‘) 같은 경우는 입력으로 주어지지 않으므로 고려하
 
 각 줄마다 "#T" (T는 테스트 케이스 번호)를 출력한 뒤, 답을 출력한다.
 
- """ 
-def bracketchecker(s):
-    bracket = []
+ """
+
+
+def check_bracket(s):
+    arr = list(map(str, s))
     checker = []
-    i = 0
-    for j in s:
-        if j in ['(','{',')','}']:
-            bracket.append(j)
-    while i < len(bracket):
-        if bracket[i] in ['(','{']:
-            checker.append(bracket[i])
-        if bracket[i] in [')','}']:
-            if checker[-1]=='(':
-                if bracket[i] == ')':
-                    checker.pop(-1)
-                elif bracket[i] == '}':
-                    return 0
-            elif checker[-1]=='{':
-                if bracket[i] == '}':
-                    checker.pop(-1)
-                elif bracket[i] == ')':
-                    return 0
-        i += 1
+    find = 1
+    for i in arr:
+        if i in ['(','{',')','}']:
+            checker.append(i)
+    
+    for i in checker:
+        if i == "(":
+            for i in range(len(checker)):
+                if checker[i] == ")":
+                    checker.pop(i)
+                    find = 1
+                    break
+                else:
+                    find = 0
+        if i == "{":
+            for i in range(len(checker)):
+                if checker[i] == "}":
+                    checker.pop(i)
+                    find = 1
+                    break
+                else:
+                    find = 0
 
-    if len(checker)==0:
-        return 1
-    else:
-        return 0
-
-
+    return find
     
 T = int(input())
 
 for test_case in range(1, T+1):
     s = input()
-    
-    print("#{0} {1}".format(test_case, bracketchecker(s)))
+
+    print("#{0} {1}".format(test_case, check_bracket(s)))

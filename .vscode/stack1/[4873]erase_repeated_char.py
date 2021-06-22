@@ -26,21 +26,25 @@ def Erase_repeated(char):
     
     stack = []
     v = len(stack)
-    while v < len(char) and len(char)!=len(stack):
-        w = v+1
-        if w >= len(char):
-            break
-        if char[v] != char[w]:
-            stack.append(char[v])
-            v = w
-        else:
-            if not stack:
-                del char[v:w]
-            else:
+    while len(char)!=len(stack):
+        while v < (len(char)-1):
+            w = v+1
+            if char[v] != char[w]:
                 stack.append(char[v])
-                del char[v:w+1]
-                del stack[len(stack)-(w-v+1):]
-                v = len(stack)
+                v = w
+            else:
+                if not stack:
+                    stack.append(char[v])
+                    del char[v:v+1]
+                    del stack[-1]
+                else:
+                    stack.append(char[v])
+                    del char[v:v+2]
+                    del stack[-2:]
+                    v = len(stack)
+        else:
+            stack.append(char[v])
+        
     return char
 
 T = int(input())
